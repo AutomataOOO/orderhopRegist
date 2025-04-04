@@ -1,26 +1,58 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  /* 기본 스타일 */
+  body {
+    @apply bg-secondary-50 dark:bg-secondary-900 text-secondary-900 dark:text-secondary-50 antialiased;
+  }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* 기본 타이포그래피 */
+  h1 {
+    @apply text-heading-1 font-bold;
+  }
+  h2 {
+    @apply text-heading-2 font-bold;
+  }
+  h3 {
+    @apply text-heading-3 font-bold;
+  }
+  h4 {
+    @apply text-heading-4 font-bold;
+  }
+  p {
+    @apply text-body;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* 버튼 스타일 */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-colors;
+  }
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+  .btn-secondary {
+    @apply bg-secondary-100 text-secondary-900 hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:ring-offset-2;
+  }
+  
+  /* 입력 필드 스타일 */
+  .input {
+    @apply block w-full rounded-lg border border-secondary-200 px-3 py-2 text-body shadow-sm 
+    focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500;
+  }
+
+  /* 컨테이너 스타일 */
+  .content-container {
+    @apply container;
+  }
+}
+
+@layer utilities {
+  /* 추가 유틸리티 클래스 */
+  .text-balance {
+    text-wrap: balance;
+  }
 }
