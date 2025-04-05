@@ -11,14 +11,16 @@ import { useCallback } from 'react';
 import { FormEvent } from 'react';
 import { PromoSection } from './PromoSection';
 import { Footer } from '@/components/layout/Footer';
+import Image from 'next/image';
 
 interface RegisterFormProps {
   storeName: string;
   storeId: string;
   brandId: string;
+  storeImageUrl?: string;
 }
 
-export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName, storeId, brandId }) => {
+export function RegisterForm({ storeName, storeId, brandId, storeImageUrl }: RegisterFormProps) {
   const {
     formData,
     errors,
@@ -86,6 +88,19 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName, storeId, 
     <div className="relative">
       <div className="min-h-[calc(100vh-4rem)]">
         <div className="mx-auto w-full max-w-[480px] pb-24">
+          <div className="text-center mb-4 mt-8">
+            {storeImageUrl && (
+              <div className="mb-4">
+                <Image
+                  src={storeImageUrl}
+                  alt={storeName}
+                  width={200}
+                  height={200}
+                  className="mx-auto rounded-lg"
+                />
+              </div>
+            )}
+          </div>
           <h3 className="mb-8 text-center text-secondary-900 dark:text-secondary-50">
             회원가입
           </h3>
@@ -155,4 +170,4 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName, storeId, 
       />
     </div>
   );
-}; 
+} 

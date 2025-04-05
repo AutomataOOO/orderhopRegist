@@ -8,7 +8,7 @@ export function PromoSection() {
           <img
             src="/card-promo.svg"
             alt="Card Promotion"
-            className="max-w-2xl"
+            className="w-full"
           />
           <div className="absolute bottom-12 left-12 space-y-4">
             <h2 className="text-3xl font-bold text-secondary-900">

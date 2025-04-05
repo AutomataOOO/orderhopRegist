@@ -22,8 +22,8 @@ const config: Config = {
       // 반응형 breakpoints
       screens: {
         'mobile': '360px',
-        'tablet': '768px',
-        'desktop': '1170px',
+        'tablet': '600px',
+        'desktop': '1024px',
         'wide': '1440px',
       },
       // 색상 테마

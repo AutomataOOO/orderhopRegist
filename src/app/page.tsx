@@ -66,28 +66,22 @@ export default function HomePage() {
   return (
     <div className="h-screen overflow-hidden [&::-webkit-scrollbar]:hidden">
       <div className="flex h-full min-w-[360px] [&::-webkit-scrollbar]:hidden">
-        <div className="flex w-full desktop:mr-[300px]">
-          <PromoSection />
-          <div className="registration-page relative flex h-full min-w-[360px] w-full flex-col mx-auto tablet:max-w-[600px] desktop:w-[600px] desktop:flex-shrink-0">
+        <div className="flex w-full">
+          <div className="hidden desktop:flex min-w-[424px] max-w-[680px] flex-1">
+            <PromoSection />
+          </div>
+          <div className="registration-page relative flex h-full min-w-[360px] w-full flex-col tablet:max-w-[600px] desktop:w-[600px] desktop:flex-shrink-0">
             <Header />
             {/* 스크롤 가능한 컨텐츠 영역 */}
-            <div className="scrollable-content flex-1 overflow-y-auto px-4 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
+            <div className="scrollable-content flex-1 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
               <div className="min-h-[calc(100vh-4rem)] flex flex-col"> {/* 4rem은 Header 높이 */}
                 <div className="flex-1">
-                  <div className="text-center mb-4 mt-8">
-                    {storeInfo.web_image_url && (
-                      <div className="mb-4">
-                        <Image
-                          src={storeInfo.web_image_url}
-                          alt={storeInfo.name}
-                          width={200}
-                          height={200}
-                          className="mx-auto rounded-lg"
-                        />
-                      </div>
-                    )}
-                  </div>
-                  <RegisterForm storeName={storeInfo.name} storeId={storeId} brandId={brandId} />
+                  <RegisterForm 
+                    storeName={storeInfo.name} 
+                    storeId={storeId} 
+                    brandId={brandId}
+                    storeImageUrl={storeInfo.web_image_url}
+                  />
                 </div>
               </div>
             </div>
