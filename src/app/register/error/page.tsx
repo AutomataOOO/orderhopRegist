@@ -21,20 +21,12 @@ export default function ErrorPage() {
           </p>
           <p className="text-red-600">{errorMessage}</p>
         </div>
-        <div className="space-x-4">
-          <button
-            onClick={() => router.back()}
-            className="btn btn-secondary"
-          >
-            다시 시도하기
-          </button>
-          <button
-            onClick={() => router.push('/')}
-            className="btn btn-primary"
-          >
-            처음으로
-          </button>
-        </div>
+        <button
+          onClick={() => router.back()}
+          className="btn btn-secondary"
+        >
+          다시 시도하기
+        </button>
       </div>
     </div>
   );

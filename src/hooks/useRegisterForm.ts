@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { RegisterFormData, FormErrors, RegisterRequestData } from '@/types/register';
 import { validateField, validateForm, formatPhoneNumber } from '@/utils/formValidation';
 import { ERROR_MESSAGES } from '@/constants/errorMessages';
-import { register } from '@/services/auth';
+import { register, ApiError } from '@/services/auth';
 import { useRouter } from 'next/navigation';
 
 export const useRegisterForm = (storeName: string, storeId: string, brandId: string) => {
@@ -115,7 +115,10 @@ export const useRegisterForm = (storeName: string, storeId: string, brandId: str
       if (error instanceof Error) {
         setSubmitError(error.message);
         console.log('에러 페이지로 이동:', error.message);
-        router.push(`/register/error?code=REGISTER_FAILED&message=${encodeURIComponent(error.message)}`);
+        // API 에러 객체에서 code와 message를 추출
+        const apiError = error.cause as ApiError;
+        const errorCode = apiError?.code || 'REGISTER_FAILED';
+        router.push(`/register/error?code=${errorCode}&message=${encodeURIComponent(error.message)}`);
       } else {
         setSubmitError(ERROR_MESSAGES.AUTH.REGISTER_FAILED);
         console.log('기본 에러 페이지로 이동');

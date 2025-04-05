@@ -6,9 +6,10 @@ interface RegisterData {
   brand_id: string;
 }
 
-interface ApiError {
+export interface ApiError {
   code: string;
   message: string;
+  details: null | any;
 }
 
 interface StoreInfo {
@@ -43,14 +44,15 @@ export async function register(data: RegisterData): Promise<void> {
     console.log("Response status:", response.status);
     console.log("Response headers:", Object.fromEntries(response.headers.entries()));
     
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Error response:", errorText);
-      throw new Error(`API request failed with status ${response.status}: ${errorText}`);
-    }
-    
     const responseData = await response.json();
     console.log("Response data:", responseData);
+
+    if (!response.ok) {
+      const errorData = responseData as ApiError;
+      const error = new Error(errorData.message || `API request failed with status ${response.status}`);
+      error.cause = errorData;
+      throw error;
+    }
   } catch (error) {
     console.error("API call failed with error:", error);
     if (error instanceof Error) {
