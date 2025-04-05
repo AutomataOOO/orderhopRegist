@@ -87,7 +87,7 @@ export function RegisterForm({ storeName, storeId, brandId, storeImageUrl }: Reg
   return (
     <div className="relative">
       <div className="min-h-[calc(100vh-4rem)]">
-        <div className="mx-auto w-full max-w-[480px] pb-24">
+        <div className="mx-auto w-full max-w-[480px] pb-12 px-4">
           <div className="text-center mb-4 mt-8">
             {storeImageUrl && (
               <div className="mb-4">
