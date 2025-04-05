@@ -10,6 +10,8 @@ import { useCustomScroll } from '@/hooks/useCustomScroll';
 export default function HomePage() {
   const searchParams = useSearchParams();
   const storeName = searchParams.get('storeName') || '';
+  const storeId = searchParams.get('store_id') || '';
+  const brandId = searchParams.get('brand_id') || '';
 
   useCustomScroll();  // 기본 설정값 사용
 
@@ -21,7 +23,7 @@ export default function HomePage() {
           <Header />
           {/* 스크롤 가능한 컨텐츠 영역 */}
           <div className="scrollable-content flex-1 overflow-y-auto px-4 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
-            <RegisterForm storeName={storeName} />
+            <RegisterForm storeName={storeName} storeId={storeId} brandId={brandId} />
           </div>
           {/* <Footer /> */}
         </div>

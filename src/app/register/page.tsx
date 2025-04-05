@@ -111,7 +111,7 @@ export default function RegisterPage() {
                   id="terms"
                   className="input mt-1.5 h-48 resize-none bg-white dark:bg-secondary-900 dark:text-secondary-50"
                   readOnly
-                  value={TERMS}
+                  value={TERMS.map((term) => term.content).join('\n')}
                 />
               </div>
 

@@ -15,12 +15,12 @@ export default function SuccessPage() {
         <p className="mb-8 text-secondary-600">
           OrderHop과 함께 더 편리한 주문관리를 시작하세요
         </p>
-        <button
+        {/* <button
           onClick={() => router.push('/login')}
           className="btn btn-primary"
         >
           로그인하기
-        </button>
+        </button> */}
       </div>
     </div>
   );

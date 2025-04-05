@@ -1,7 +1,15 @@
 export interface RegisterFormData {
   phoneNumber: string;
-  countryCode: string;
   name: string;
+  countryCode: string;
+}
+
+export interface RegisterRequestData {
+  phone_number: string;
+  name: string;
+  store_name: string;
+  store_id: string;
+  brand_id: string;
 }
 
 export interface FormErrors {
@@ -11,10 +19,4 @@ export interface FormErrors {
 
 export interface TermAgreements {
   [key: string]: boolean;
-}
-
-export interface RegisterRequestData {
-  phoneNumber: string;
-  name: string;
-  storeName: string;
 } 

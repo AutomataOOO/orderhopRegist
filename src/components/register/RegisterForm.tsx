@@ -14,9 +14,11 @@ import { Footer } from '@/components/layout/Footer';
 
 interface RegisterFormProps {
   storeName: string;
+  storeId: string;
+  brandId: string;
 }
 
-export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName }) => {
+export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName, storeId, brandId }) => {
   const {
     formData,
     errors,
@@ -27,7 +29,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName }) => {
     handlePhoneNumberChange,
     handleCountryCodeChange,
     handleSubmit,
-  } = useRegisterForm(storeName);
+  } = useRegisterForm(storeName, storeId, brandId);
 
   const {
     agreements,
@@ -74,10 +76,10 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName }) => {
     });
   }, [isFormValid, isSubmitting, formData, errors, isAgreed, agreements]);
 
-  const handleFormSubmit = useCallback((e?: FormEvent) => {
-    if (e) {
-      handleSubmit(e);
-    }
+  const handleFormSubmit = useCallback((e: FormEvent) => {
+    console.log('=== RegisterForm handleFormSubmit 시작 ===');
+    console.log('이벤트:', e);
+    handleSubmit(e);
   }, [handleSubmit]);
 
   return (
@@ -86,7 +88,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName }) => {
         <h3 className="mb-8 mt-8 text-center text-secondary-900 dark:text-secondary-50">
           회원가입
         </h3>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleFormSubmit} className="space-y-6">
           {/* 매장명 필드 (읽기 전용) */}
           <div>
             <label
@@ -99,30 +101,30 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName }) => {
               type="text"
               id="storeName"
               value={storeName}
-              className="input mt-1.5 w-full bg-secondary-50 dark:bg-secondary-800 dark:text-secondary-50"
               readOnly
+              className="mt-1 block w-full rounded-md border border-secondary-300 bg-secondary-50 px-3 py-2 text-secondary-900 placeholder-secondary-400 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 dark:border-secondary-700 dark:bg-secondary-800 dark:text-secondary-50 dark:placeholder-secondary-500"
             />
           </div>
 
-          {/* 휴대폰 번호 입력 필드 */}
+          {/* 전화번호 입력 */}
           <PhoneNumberInput
             value={formData.phoneNumber}
-            countryCode={formData.countryCode}
-            error={errors.phoneNumber}
             onChange={handlePhoneNumberChange}
             onBlur={() => handleBlur('phoneNumber')}
+            error={errors.phoneNumber}
+            countryCode={formData.countryCode}
             onCountryCodeChange={handleCountryCodeChange}
           />
 
-          {/* 이름 입력 필드 */}
+          {/* 이름 입력 */}
           <NameInput
             value={formData.name}
-            error={errors.name}
             onChange={(value) => handleInputChange('name', value)}
             onBlur={() => handleBlur('name')}
+            error={errors.name}
           />
 
-          {/* 약관 동의 섹션 */}
+          {/* 약관 동의 */}
           <TermsSection
             agreements={agreements}
             onAgreementChange={handleAgreementChange}
@@ -130,21 +132,17 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName }) => {
             onViewTerm={handleViewTerm}
           />
 
-          {submitError && (
-            <div className="text-red-500 text-sm text-center">
-              {submitError}
-            </div>
-          )}
-        </form>
-        <Footer />
-      </div>
+          {/* 프로모션 섹션 */}
+          <PromoSection />
 
-      {/* 하단 고정 제출 버튼 */}
-      <SubmitButton
-        isDisabled={!isFormValid || isSubmitting}
-        isLoading={isSubmitting}
-        onClick={handleFormSubmit}
-      />
+          {/* 제출 버튼 */}
+          <SubmitButton
+            isDisabled={!isFormValid}
+            isLoading={isSubmitting}
+          />
+        </form>
+      </div>
+      <Footer />
 
       {/* 약관 내용 모달 */}
       <TermsModal
