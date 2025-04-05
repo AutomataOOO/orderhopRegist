@@ -104,7 +104,7 @@ export function RegisterForm({ storeName, storeId, brandId, storeImageUrl }: Reg
           <h3 className="mb-8 text-center text-secondary-900 dark:text-secondary-50">
             회원가입
           </h3>
-          <form onSubmit={handleFormSubmit}>
+          <form id="registerForm" onSubmit={handleFormSubmit}>
             <div className="space-y-6">
               {/* 매장명 필드 (읽기 전용) */}
               <div>
@@ -159,6 +159,7 @@ export function RegisterForm({ storeName, storeId, brandId, storeImageUrl }: Reg
       <SubmitButton
         isDisabled={!isFormValid}
         isLoading={isSubmitting}
+        form="registerForm"
       />
 
       {/* 약관 내용 모달 */}
