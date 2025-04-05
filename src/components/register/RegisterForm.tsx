@@ -83,64 +83,68 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName, storeId, 
   }, [handleSubmit]);
 
   return (
-    <div className="relative flex flex-col min-h-full">
-      <div className="flex-1 mx-auto w-full max-w-[480px]">
-        <h3 className="mb-8 text-center text-secondary-900 dark:text-secondary-50">
-          회원가입
-        </h3>
-        <form onSubmit={handleFormSubmit} className="space-y-6">
-          {/* 매장명 필드 (읽기 전용) */}
-          <div>
-            <label
-              htmlFor="storeName"
-              className="block text-body-sm text-secondary-700 dark:text-secondary-300"
-            >
-              매장명
-            </label>
-            <input
-              type="text"
-              id="storeName"
-              value={storeName}
-              readOnly
-              className="mt-1 block w-full rounded-md border border-secondary-300 bg-secondary-50 px-3 py-2 text-secondary-900 placeholder-secondary-400 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 dark:border-secondary-700 dark:bg-secondary-800 dark:text-secondary-50 dark:placeholder-secondary-500"
-            />
-          </div>
+    <div className="relative">
+      <div className="min-h-[calc(100vh-4rem)]">
+        <div className="mx-auto w-full max-w-[480px] pb-24">
+          <h3 className="mb-8 text-center text-secondary-900 dark:text-secondary-50">
+            회원가입
+          </h3>
+          <form onSubmit={handleFormSubmit}>
+            <div className="space-y-6">
+              {/* 매장명 필드 (읽기 전용) */}
+              <div>
+                <label
+                  htmlFor="storeName"
+                  className="block text-body-sm text-secondary-700 dark:text-secondary-300"
+                >
+                  매장명
+                </label>
+                <input
+                  type="text"
+                  id="storeName"
+                  value={storeName}
+                  readOnly
+                  className="mt-1 block w-full rounded-md border border-secondary-300 bg-secondary-50 px-3 py-2 text-secondary-900 placeholder-secondary-400 focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 dark:border-secondary-700 dark:bg-secondary-800 dark:text-secondary-50 dark:placeholder-secondary-500"
+                />
+              </div>
 
-          {/* 전화번호 입력 */}
-          <PhoneNumberInput
-            value={formData.phoneNumber}
-            onChange={handlePhoneNumberChange}
-            onBlur={() => handleBlur('phoneNumber')}
-            error={errors.phoneNumber}
-            countryCode={formData.countryCode}
-            onCountryCodeChange={handleCountryCodeChange}
-          />
+              {/* 전화번호 입력 */}
+              <PhoneNumberInput
+                value={formData.phoneNumber}
+                onChange={handlePhoneNumberChange}
+                onBlur={() => handleBlur('phoneNumber')}
+                error={errors.phoneNumber}
+                countryCode={formData.countryCode}
+                onCountryCodeChange={handleCountryCodeChange}
+              />
 
-          {/* 이름 입력 */}
-          <NameInput
-            value={formData.name}
-            onChange={(value) => handleInputChange('name', value)}
-            onBlur={() => handleBlur('name')}
-            error={errors.name}
-          />
+              {/* 이름 입력 */}
+              <NameInput
+                value={formData.name}
+                onChange={(value) => handleInputChange('name', value)}
+                onBlur={() => handleBlur('name')}
+                error={errors.name}
+              />
 
-          {/* 약관 동의 */}
-          <TermsSection
-            agreements={agreements}
-            onAgreementChange={handleAgreementChange}
-            onAgreeAll={handleAgreeAll}
-            onViewTerm={handleViewTerm}
-          />
+              {/* 약관 동의 */}
+              <TermsSection
+                agreements={agreements}
+                onAgreementChange={handleAgreementChange}
+                onAgreeAll={handleAgreeAll}
+                onViewTerm={handleViewTerm}
+              />
 
-          <Footer />
-
-          {/* 제출 버튼 */}
-          <SubmitButton
-            isDisabled={!isFormValid}
-            isLoading={isSubmitting}
-          />
-        </form>
+              <Footer />
+            </div>
+          </form>
+        </div>
       </div>
+
+      {/* 제출 버튼 */}
+      <SubmitButton
+        isDisabled={!isFormValid}
+        isLoading={isSubmitting}
+      />
 
       {/* 약관 내용 모달 */}
       <TermsModal

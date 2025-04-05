@@ -65,10 +65,10 @@ export default function HomePage() {
 
   return (
     <div className="h-screen overflow-hidden [&::-webkit-scrollbar]:hidden">
-      <div className="flex h-full min-w-[360px] tablet:justify-center [&::-webkit-scrollbar]:hidden">
-        <div className="flex desktop:mr-[300px]">
+      <div className="flex h-full min-w-[360px] [&::-webkit-scrollbar]:hidden">
+        <div className="flex w-full desktop:mr-[300px]">
           <PromoSection />
-          <div className="registration-page relative flex h-full min-w-[360px] w-full flex-col tablet:w-[600px] desktop:w-[600px] desktop:flex-shrink-0">
+          <div className="registration-page relative flex h-full min-w-[360px] w-full flex-col mx-auto tablet:max-w-[600px] desktop:w-[600px] desktop:flex-shrink-0">
             <Header />
             {/* 스크롤 가능한 컨텐츠 영역 */}
             <div className="scrollable-content flex-1 overflow-y-auto px-4 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">

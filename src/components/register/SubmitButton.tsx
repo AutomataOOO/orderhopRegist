@@ -5,12 +5,12 @@ interface SubmitButtonProps {
 
 export function SubmitButton({ isDisabled, isLoading }: SubmitButtonProps) {
   return (
-    <div className="mt-auto sticky bottom-0 left-0 right-0 z-[100] border-t border-secondary-200 bg-white px-4 py-4 shadow-md dark:border-secondary-700 dark:bg-secondary-900">
-      <div className="mx-auto max-w-[480px]">
+    <div className="sticky bottom-0 left-0 right-0 border-t border-secondary-200 bg-white shadow-md dark:border-secondary-700 dark:bg-secondary-900">
+      <div className="mx-auto w-full max-w-[480px] px-4 py-4">
         <button
           type="submit"
           disabled={isDisabled}
-          className="btn btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-lg bg-primary-600 px-4 py-3 text-center text-white transition-colors hover:bg-primary-700 disabled:cursor-not-allowed disabled:bg-secondary-300 dark:disabled:bg-secondary-700"
         >
           {isLoading ? '가입 중...' : '가입하기'}
         </button>
