@@ -18,19 +18,12 @@ export const TermsSection: React.FC<TermsSectionProps> = ({
 }) => {
   const isAllAgreed = Object.values(agreements).every(Boolean);
 
-  const handleAgreeAll = (e: React.MouseEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement;
-    onAgreeAll(target.checked);
+  const handleAgreeAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onAgreeAll(e.target.checked);
   };
 
-  const handleAgreementChange = (termId: string) => (e: React.MouseEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement;
-    if (e.type === 'click' && target.checked === agreements[termId as keyof TermAgreements]) {
-      // 이미 체크된 상태에서 클릭 이벤트가 발생한 경우, checked 상태를 반전
-      onAgreementChange(termId);
-    } else {
-      onAgreementChange(termId);
-    }
+  const handleAgreementChange = (termId: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    onAgreementChange(termId);
   };
 
   return (
@@ -42,7 +35,6 @@ export const TermsSection: React.FC<TermsSectionProps> = ({
           id="agreeAll"
           checked={isAllAgreed}
           onChange={handleAgreeAll}
-          onClick={handleAgreeAll}
           className="h-4 w-4 rounded border-secondary-300 text-primary-600 focus:ring-primary-500 dark:border-secondary-600 dark:bg-secondary-700 dark:ring-offset-secondary-800"
         />
         <label
@@ -63,7 +55,6 @@ export const TermsSection: React.FC<TermsSectionProps> = ({
                 id="service"
                 checked={agreements.service}
                 onChange={handleAgreementChange('service')}
-                onClick={handleAgreementChange('service')}
                 className="h-4 w-4 rounded border-secondary-300 text-primary-600 focus:ring-primary-500 dark:border-secondary-600 dark:bg-secondary-700 dark:ring-offset-secondary-800"
               />
               <label
@@ -89,7 +80,6 @@ export const TermsSection: React.FC<TermsSectionProps> = ({
                 id="privacy"
                 checked={agreements.privacy}
                 onChange={handleAgreementChange('privacy')}
-                onClick={handleAgreementChange('privacy')}
                 className="h-4 w-4 rounded border-secondary-300 text-primary-600 focus:ring-primary-500 dark:border-secondary-600 dark:bg-secondary-700 dark:ring-offset-secondary-800"
               />
               <label
@@ -118,7 +108,6 @@ export const TermsSection: React.FC<TermsSectionProps> = ({
                 id="marketing"
                 checked={agreements.marketing}
                 onChange={handleAgreementChange('marketing')}
-                onClick={handleAgreementChange('marketing')}
                 className="h-4 w-4 rounded border-secondary-300 text-primary-600 focus:ring-primary-500 dark:border-secondary-600 dark:bg-secondary-700 dark:ring-offset-secondary-800"
               />
               <label
