@@ -76,7 +76,7 @@ export default function HomePage() {
   return (
     <div className="h-screen overflow-hidden [&::-webkit-scrollbar]:hidden">
       <div className="flex h-full min-w-[360px] [&::-webkit-scrollbar]:hidden">
-        <div className="flex w-full !tablet:justify-center">
+        <div className="flex w-full mobile:justify-center desktop:justify-start">
           <div className="hidden desktop:flex min-w-[424px] max-w-[600px] flex-1">
             <PromoSection />
           </div>
