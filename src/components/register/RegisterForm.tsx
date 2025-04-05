@@ -85,7 +85,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName, storeId, 
   return (
     <div className="relative flex flex-col min-h-full">
       <div className="flex-1 mx-auto w-full max-w-[480px]">
-        <h3 className="mb-8 mt-8 text-center text-secondary-900 dark:text-secondary-50">
+        <h3 className="mb-8 text-center text-secondary-900 dark:text-secondary-50">
           회원가입
         </h3>
         <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -132,8 +132,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName, storeId, 
             onViewTerm={handleViewTerm}
           />
 
-          {/* 프로모션 섹션 */}
-          <PromoSection />
+          <Footer />
 
           {/* 제출 버튼 */}
           <SubmitButton
@@ -142,7 +141,6 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ storeName, storeId, 
           />
         </form>
       </div>
-      <Footer />
 
       {/* 약관 내용 모달 */}
       <TermsModal
