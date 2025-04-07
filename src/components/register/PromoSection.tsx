@@ -1,14 +1,18 @@
 import React from 'react';
+import Image from 'next/image';
 
 export function PromoSection() {
   return (
     <div className="hidden flex-1 items-center justify-center bg-gradient-to-b from-blue-50 to-white desktop:flex [&::-webkit-scrollbar]:hidden">
       <div className="relative p-8">
         <div className="space-y-6">
-          <img
+          <Image
             src="/card-promo.svg"
             alt="Card Promotion"
-            className="w-full"
+            width={800}
+            height={600}
+            className="max-w-2xl"
+            priority
           />
           <div className="absolute bottom-12 left-12 space-y-4">
             <h2 className="text-3xl font-bold text-secondary-900">

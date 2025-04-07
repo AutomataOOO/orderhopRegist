@@ -2,25 +2,13 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { Header } from '@/components/layout/Header';
 import { PromoSection } from '@/components/register/PromoSection';
 import { RegisterForm } from '@/components/register/RegisterForm';
 import { getStoreInfo } from '@/services/auth';
 
-/**
- * 매장 정보 인터페이스
- */
-interface StoreInfo {
-  name: string;  // 매장 이름
-  web_image_url: string;  // 매장 웹 이미지 URL
-}
-
-/**
- * 회원가입 페이지 컴포넌트
- * URL 파라미터로부터 매장 정보를 가져와 회원가입 폼을 렌더링합니다.
- */
-export default function HomePage() {
-  // URL 파라미터에서 매장 ID와 브랜드 ID를 가져옵니다
+function HomeContent() {
   const searchParams = useSearchParams();
   const storeId = searchParams.get('store_id') || '';
   const brandId = searchParams.get('brand_id') || '';
@@ -125,5 +113,13 @@ export default function HomePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
