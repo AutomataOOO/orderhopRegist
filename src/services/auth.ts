@@ -9,19 +9,20 @@ interface RegisterData {
 export interface ApiError {
   code: string;
   message: string;
-  details: null | any;
+  details: null | unknown;
 }
 
-interface StoreInfo {
+export interface StoreInfo {
   name: string;
   web_image_url: string;
 }
 
 if (!process.env.NEXT_PUBLIC_API_URL) {
-  throw new Error('NEXT_PUBLIC_API_URL environment variable is not set');
+  throw new Error("NEXT_PUBLIC_API_URL environment variable is not set");
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.arabiz.live';
+const API_BASE_URL = 'https://api.arabiz.live';
 
 export async function register(data: RegisterData): Promise<void> {
   try {
@@ -29,27 +30,31 @@ export async function register(data: RegisterData): Promise<void> {
     console.log("API_BASE_URL:", API_BASE_URL);
     console.log("Request data:", data);
     console.log("Full URL:", `${API_BASE_URL}/v1/w/users`);
-    
+
     const response = await fetch(`${API_BASE_URL}/v1/w/users`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Origin': 'http://localhost:3000',
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
-      credentials: 'include',
+      credentials: "include",
       body: JSON.stringify(data),
     });
-    
+
     console.log("Response status:", response.status);
-    console.log("Response headers:", Object.fromEntries(response.headers.entries()));
-    
+    console.log(
+      "Response headers:",
+      Object.fromEntries(response.headers.entries())
+    );
+
     const responseData = await response.json();
     console.log("Response data:", responseData);
 
     if (!response.ok) {
       const errorData = responseData as ApiError;
-      const error = new Error(errorData.message || `API request failed with status ${response.status}`);
+      const error = new Error(
+        errorData.message || `API request failed with status ${response.status}`
+      );
       error.cause = errorData;
       throw error;
     }
@@ -59,7 +64,7 @@ export async function register(data: RegisterData): Promise<void> {
       console.error("Error details:", {
         name: error.name,
         message: error.message,
-        stack: error.stack
+        stack: error.stack,
       });
     }
     throw error;
@@ -72,24 +77,25 @@ export async function getStoreInfo(storeId: string): Promise<StoreInfo> {
     console.log("API_BASE_URL:", API_BASE_URL);
     console.log("Store ID:", storeId);
     console.log("Full URL:", `${API_BASE_URL}/v1/w/stores/${storeId}`);
-    
+
     const response = await fetch(`${API_BASE_URL}/v1/w/stores/${storeId}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Accept': 'application/json',
-        'Origin': 'http://localhost:3000',
+        Accept: "application/json",
       },
-      credentials: 'include',
+      credentials: "include",
     });
-    
+
     console.log("Response status:", response.status);
-    
+
     if (!response.ok) {
       const errorText = await response.text();
       console.error("Error response:", errorText);
-      throw new Error(`Store info API request failed with status ${response.status}: ${errorText}`);
+      throw new Error(
+        `Store info API request failed with status ${response.status}: ${errorText}`
+      );
     }
-    
+
     const responseData = await response.json();
     console.log("Store info response data:", responseData);
     return responseData;
@@ -97,4 +103,4 @@ export async function getStoreInfo(storeId: string): Promise<StoreInfo> {
     console.error("Store info API call failed with error:", error);
     throw error;
   }
-} 
+}
