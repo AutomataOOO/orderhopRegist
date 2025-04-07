@@ -12,7 +12,6 @@ function HomeContent() {
   const searchParams = useSearchParams();
   const storeId = searchParams.get('store_id') || '';
   const brandId = searchParams.get('brand_id') || '';
-  console.log('hi')
   
   // 매장 정보와 에러 상태를 관리합니다
   const [storeInfo, setStoreInfo] = useState<StoreInfo | null>(null);
