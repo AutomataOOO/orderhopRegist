@@ -68,7 +68,7 @@ export function RegisterForm({ storeName, storeId, brandId, storeImageUrl }: Reg
 
   // 디버깅을 위한 useEffect
   useEffect(() => {
-    console.log('Form State1:', {
+    console.log('Form State2:', {
       isFormValid,
       isSubmitting,
       formData,
